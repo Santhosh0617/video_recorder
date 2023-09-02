@@ -1,10 +1,8 @@
 package com.example.video_recorder
-import android.app.Activity;
-import android.media.MediaRecorder;
-import io.flutter.embedding.engine.plugins.FlutterPlugin;
-import io.flutter.plugin.common.MethodCall;
-import io.flutter.plugin.common.MethodChannel;
 
+import io.flutter.embedding.engine.plugins.FlutterPlugin
+import io.flutter.plugin.common.MethodCall
+import io.flutter.plugin.common.MethodChannel
 /** VideoRecorderPlugin */
 class VideoRecorderPlugin: FlutterPlugin, MethodChannel.MethodCallHandler {
   private Activity activity;
