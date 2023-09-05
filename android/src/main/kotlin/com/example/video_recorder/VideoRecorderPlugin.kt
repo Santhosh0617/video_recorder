@@ -1,53 +1,54 @@
 package com.example.video_recorder
 
+import android.app.Activity
+import android.media.MediaRecorder
+import androidx.annotation.NonNull
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
+
 /** VideoRecorderPlugin */
-class VideoRecorderPlugin: FlutterPlugin, MethodChannel.MethodCallHandler {
-  private Activity activity;
-  private MediaRecorder mediaRecorder;
-  private boolean isRecording = false;
+class VideoRecorderPlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
+    private lateinit var activity: Activity
+    private lateinit var mediaRecorder: MediaRecorder
+    private var isRecording = false
 
-  @Override
-  public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
-      MethodChannel channel = new MethodChannel(binding.getBinaryMessenger(), "video_recorder");
-      channel.setMethodCallHandler(this);
-  }
+    override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+        val channel = MethodChannel(binding.binaryMessenger, "video_recorder")
+        channel.setMethodCallHandler(this)
+        activity = binding.applicationContext as Activity
+    }
 
-  @Override
-  public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
-      switch (call.method) {
-          case "startRecording":
-              startRecording();
-              result.success(null);
-              break;
-          case "stopRecording":
-              stopRecording();
-              result.success(null);
-              break;
-          default:
-              result.notImplemented();
-      }
-  }
+    override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: MethodChannel.Result) {
+        when (call.method) {
+            "startRecording" -> {
+                startRecording()
+                result.success(null)
+            }
+            "stopRecording" -> {
+                stopRecording()
+                result.success(null)
+            }
+            else -> result.notImplemented()
+        }
+    }
 
-  private void startRecording() {
-      if (!isRecording) {
-          // Implement Android screen recording logic here
-          // You will need to use MediaRecorder or another suitable library
-          isRecording = true;
-      }
-  }
+    private fun startRecording() {
+        if (!isRecording) {
+            // Implement Android screen recording logic here
+            // You will need to use MediaRecorder or another suitable library
+            isRecording = true
+        }
+    }
 
-  private void stopRecording() {
-      if (isRecording) {
-          // Stop the screen recording
-          isRecording = false;
-      }
-  }
+    private fun stopRecording() {
+        if (isRecording) {
+            // Stop the screen recording
+            isRecording = false
+        }
+    }
 
-  @Override
-  public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
-      // Clean up resources if needed
-  }
+    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+        // Clean up resources if needed
+    }
 }
