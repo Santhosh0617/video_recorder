@@ -78,9 +78,9 @@ class VideoRecorderPlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
         // You can use Environment.getExternalStorageDirectory() to get the external storage directory
         // and append a unique filename to it.
         // For example:
-        // val dir = Environment.getExternalStorageDirectory()
-        // val fileName = "video_${System.currentTimeMillis()}.mp4"
-        // return File(dir, fileName).absolutePath
+        val dir = Environment.getExternalStorageDirectory()
+        val fileName = "video_${System.currentTimeMillis()}.mp4"
+        return File(dir, fileName).absolutePath
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
