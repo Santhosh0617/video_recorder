@@ -24,7 +24,7 @@ class VideoRecorderPlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
     override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         val channel = MethodChannel(binding.binaryMessenger, "video_recorder")
         channel.setMethodCallHandler(this)
-        activity = binding.applicationContext as Activity
+        activity = binding.activity as Activity
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: MethodChannel.Result) {
